@@ -161,9 +161,10 @@ exports.editPost = async (req, res) => {
  * Delete Note Data
  */
 exports.deleteNote = async (req, res) => {
+  
   try {
     await Note.deleteOne({ _id: req.params.id });
-    res.redirect("/");
+    res.redirect("/indexAuth");
   } catch (error) {
     console.log(error);
   }
