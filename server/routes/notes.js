@@ -4,8 +4,7 @@ const mainController = require('../controllers/mainController');
 
 function checkAuthenticated  (req, res, next) {
     if (req.isAuthenticated()) {
-        console.log("*****  is authenticated", req.isAuthenticated())
-       return next();
+        return next();
 
    }
    console.log(' is being redirected to Admin Dashboard')
