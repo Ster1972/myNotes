@@ -7,14 +7,13 @@ function checkAuthenticated  (req, res, next) {
         return next();
 
    }
-   console.log(' is being redirected to Admin Dashboard')
+   console.log(' User is being redirected to login')
    res.redirect('/login')
   }
   
   function checkNotAuthenticated(req, res, next) {
-    console.log("----------------")
     if(req.isAuthenticated()) {
-        res.redirect('/indexAuth')
+        return res.redirect('/indexAuth')
     }
     next()
   }
