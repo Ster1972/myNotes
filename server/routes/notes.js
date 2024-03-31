@@ -7,7 +7,6 @@ function checkAuthenticated  (req, res, next) {
         return next();
 
    }
-   console.log(' User is being redirected to login')
    res.redirect('/login')
   }
   
