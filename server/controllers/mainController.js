@@ -18,10 +18,12 @@ exports.homepage = async (req, res) => {
   let page = req.query.page || 1;
 
   try {
-    const notes = await Note.aggregate([{ $sort: { createdAt: -1 } }])
-      .skip(perPage * page - perPage)
-      .limit(perPage)
-      .exec();
+    const notes = await Note.aggregate([
+      { $sort: { title: 1 } }, // Sort by title in ascending order, sort by descending use "-1"
+      { $skip: perPage * page - perPage },
+      { $limit: perPage }
+    ]).exec();
+
     const count = await Note.countDocuments({});
 
     res.render("index", {
@@ -206,6 +208,40 @@ exports.searchNotes = async (req, res) => {
 //  Section for pages that need authentication
 //*****************************************
 
+
+/**
+ * Get /
+ * SearchAuth Note Data
+ */
+exports.searchNotesAuth = async (req, res) => {
+  const locals = {
+    title: "SearchAuth Note Data",
+    description: "Free NodeJs User Management System",
+    headerType: 'headerAuth' 
+  };
+
+  try {
+    let searchTerm = req.body.searchTerm;
+    const searchNoSpecialChar = searchTerm.replace(/[^a-zA-Z0-9 ]/g, "");
+
+    const notes = await Note.find({
+      $or: [
+        { title: { $regex: new RegExp(searchNoSpecialChar, "i") } },
+        { category: { $regex: new RegExp(searchNoSpecialChar, "i") } },
+        { linkurl: { $regex: new RegExp(searchNoSpecialChar, "i") } },
+        { comment: { $regex: new RegExp(searchNoSpecialChar, "i") } },
+      ],
+    });
+
+    res.render("searchAuth", {
+      notes,
+      locals,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 exports.login = async (req, res) => {
   const messages = await req.flash("info");
   const locals = {
@@ -253,6 +289,7 @@ exports.indexAuth = async (req, res) => {
   const locals = {
     title: "Home Page",
     description: "Node Js Notes App",
+    headerType: 'headerAuth' 
   };
 
   let perPage = 12;

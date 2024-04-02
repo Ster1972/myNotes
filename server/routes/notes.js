@@ -31,8 +31,10 @@ router.delete('/edit/:id', mainController.deleteNote);
 
 router.post('/search', mainController.searchNotes);
 
+
 // Routes that require authentication
 
+router.post('/searchAuth', mainController.searchNotesAuth);
 router.get('/login',  checkNotAuthenticated, mainController.login)
 router.post('/login', checkNotAuthenticated, mainController.postlogin)
 router.get('/indexAuth', checkAuthenticated, mainController.indexAuth)
