@@ -265,7 +265,7 @@ exports.login = async (req, res) => {
 exports.postlogin = function(req, res, next) {
   console.log('post login - ',req.body)
   passport.authenticate('local', function(err, user, info) {
-    console.log('post -----', user)
+    //console.log('post -----', user)
     if (err) { return next(err); }
     if (!user) {
       req.flash('info', 'Bad Email or password used'); // add this line to set the flash message
