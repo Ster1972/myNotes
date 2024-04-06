@@ -20,12 +20,4 @@
 Updated: 30 Mar 2024
 
 
-<% if (locals.headerType === 'headerAuth') { %>
-    <%- include('../partials/headerAuth.ejs') %>
-  
-  <% } else { %>
-    <%- include('../partials/header.ejs') %>
-  <% } %>
-
-  res.render('your_view', { title: 'Your Title', description: 'Your Description', headerType: 'headerAuth' });
 
