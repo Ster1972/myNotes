@@ -22,3 +22,8 @@ module.exports = {
   User: mongoose.model('User', UserSchema, 'users' )
 
 }
+
+// Info on export above
+// The first parameter is the name of the model, which is 'Note'.
+// The second parameter is the schema for the model, which is presumably defined somewhere else in the code and referenced as NoteSchema.
+// The third parameter is the name of the MongoDB collection where documents for this model will be stored, which is 'notes' in this case.
